@@ -1,4 +1,4 @@
-import os
-
-for i in range(2, 26):
-    os.mkdir(f"Day - {i}")
+b = True
+for i in range(10):
+    if i == 5 and b: i -= 1; b = False
+    print(i)
