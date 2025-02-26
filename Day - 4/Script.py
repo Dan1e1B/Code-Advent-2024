@@ -5,20 +5,18 @@ content = file.read().split("\n")
 WORD = "XMAS"
 
 # content = """
-# MMMSXXMASM
-# MSAMXMSMSA
-# AMXSXMAAMM
-# MSAMASMSMX
-# XMASAMXAMM
-# XXAMMXXAMA
-# SMSMSASXSS
-# SAXAMASAAA
-# MAMMMXMMMM
-# MXMXAXMASX
+# .M.S......
+# ..A..MSMS.
+# .M.S.MAA..
+# ..A.ASMSM.
+# .M.S.M....
+# ..........
+# S.S.S.S.S.
+# .A.A.A.A..
+# M.M.M.M.M.
+# ..........
 # """
-
-
-print(content)
+# content = content[1:-1].split("\n")
 
 
 # Returns the number of times word is in line
@@ -30,6 +28,8 @@ def read_line(line: str, word: str):
 
 
     return res
+
+
 
 result = 0
 aux = 0
@@ -147,13 +147,24 @@ for starting_col in range(len(content[0]) - len(WORD) + 2, len(WORD) - 2, -1):
     result += read_line(diagonal[::-1], WORD)
 
 
-
-
-
-
-
-
 print(f"Diagonals: {result - aux}")
 
-print(f"Answer: {result}")
+def x_word(matrix, word):
+    res = 0
+
+    print(len(word))
+    for i in range(len(matrix) - len(word) + 1):
+        for j in range(len(matrix[0]) - len(word) + 1):
+
+            diagonal = "".join([matrix[i + k] [j + k] for k in range(len(word))])
+            antidiagonal = "".join([matrix[i + k] [j + len(word) - 1 - k] for k in range(len(word))])
+            
+            if (word == diagonal or word[::-1] == diagonal) and (word == antidiagonal or word[::-1] == antidiagonal): res += 1
+
+    return res
+
+
+result = x_word(content, "MAS")
+print(f"Answer Part 2: {result}")
+
 
